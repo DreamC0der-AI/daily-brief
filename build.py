@@ -127,6 +127,8 @@ def main():
         .replace("{{PREV}}", "").replace("{{NEXT}}", "")
     (SITE / "archive.html").write_text(archive)
     (SITE / ".nojekyll").write_text("")
+    for f in (ROOT / "static").glob("*"):
+        shutil.copy(f, SITE / f.name)
     print(f"built {len(dates)} day(s) -> site/  latest={dates[0]} curated={dates[0] in curated}")
 
 
