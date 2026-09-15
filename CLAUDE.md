@@ -16,10 +16,13 @@ Local setup: `uv venv .venv && uv pip install --python .venv/bin/python -r requi
 ## Curation procedure (when the user says "make today's news" or similar)
 1. `git pull`, then `.venv/bin/python collect.py` (fresh candidates; safe to rerun, overwrites today's file).
 2. Read `data/candidates/<today>.json`. Skim all items (titles + excerpts). Do not fetch every article; open a page only when the excerpt is too thin to summarize honestly.
-3. Pick **about 20 items**, roughly: AI 6–7, Tech 5–6, Crypto 3–4, Bio 3–4. Prefer: genuinely new developments over commentary, primary sources over rewrites, items with images when equal. Merge duplicates covering the same story into one item (link the best source). Skip press releases, listicles, deals/coupons.
+3. Pick **20 items in two tiers** (user's rule, set 2026-09-15):
+   - **10 in-depth** (`kind: "long"`): the stories that matter most today. Fetch the article text for every one of these (plain HTTP with a browser User-Agent works for most; The Block, BioPharma Dive and Science block it, so lean on sibling coverage). Write 3 paragraphs, roughly 150–220 English words / 300–450 Chinese characters: what happened, the substance and numbers, and context or reaction. Separate paragraphs with a blank line (`\n\n`).
+   - **10 briefs** (`kind: "short"`): 1–2 sentences each, written from the excerpt.
+   - Mix across topics; a typical day is AI 6–7, Tech 5–6, Crypto 3–4, Bio 3–4 in total. Prefer genuinely new developments over commentary, primary sources over rewrites, items with images when equal. Merge duplicates covering the same story into one item (link the best source). Skip press releases, listicles, deals/coupons.
 4. Write `digests/<today>.json` following `digests/SCHEMA.md`. For each item write:
    - `title_en` / `title_zh`: a clear headline in each language (translate, do not transliterate; keep product names in Latin script).
-   - `summary_en` / `summary_zh`: 2–3 sentences: what happened, why it matters. Written from the excerpt; no invented details or numbers.
+   - `summary_en` / `summary_zh`: per the tier above. No invented details or numbers; if a number is not in the source, leave it out.
    - `why_en` / `why_zh` (optional, one line): the editor's note on significance or context.
    - Copy `id`, `url`, `source`, `image`, `topic` verbatim from the candidate.
    - `intro_en` / `intro_zh`: 1–2 sentence overview of the day's themes.

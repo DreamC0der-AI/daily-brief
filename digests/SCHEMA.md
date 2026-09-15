@@ -8,6 +8,7 @@
   "items": [
     {
       "id": "a1b2c3d4e5",            // from candidates
+      "kind": "long",                 // long (in-depth, 3 paragraphs split by \n\n) | short (1–2 sentences)
       "topic": "ai",                  // ai | tech | crypto | bio
       "source": "The Verge",          // from candidates
       "url": "https://...",           // from candidates
@@ -22,4 +23,4 @@
   ]
 }
 ```
-Items are rendered grouped by topic in the order ai, tech, crypto, bio; within a topic in file order (put the most important first).
+Items are rendered in two sections: "In depth" (kind=long) then "Briefs" (kind=short), each in file order (most important first). Aim for 10 + 10.

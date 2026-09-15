@@ -33,9 +33,19 @@ main{max-width:920px;margin:0 auto;padding:28px 16px 60px}
 section{margin-top:34px}
 .topic{font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif;font-size:22px;margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--fg);display:flex;align-items:baseline;gap:10px}
 .topic small{color:var(--muted);font:13px sans-serif}
-.item{display:grid;grid-template-columns:200px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
-.item:has(> .body:only-child){grid-template-columns:1fr}
-.thumb{display:block;aspect-ratio:16/10;overflow:hidden;border-radius:8px;background:var(--line)}
+.long{padding:26px 0 30px;border-bottom:1px solid var(--line)}
+.hero{display:block;max-height:420px;overflow:hidden;border-radius:10px;background:var(--line);margin-bottom:14px}
+.hero img{width:100%;height:100%;max-height:420px;object-fit:cover;display:block}
+.long h2{font-size:26px;line-height:1.25;margin:4px 0 12px}
+.long .body p{margin:0 0 12px;font-size:17px;line-height:1.65;max-width:72ch}
+.more{margin:6px 0 0;font-size:14px}.more a{color:var(--accent);text-decoration:none}
+.shorts{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.short{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.short:not(:has(.thumb)){grid-template-columns:1fr}
+.short h3{font-size:17px;line-height:1.3;margin:0 0 6px;font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif}
+.short h3 a{text-decoration:none}.short h3 a:hover{color:var(--accent)}
+.short .sum{font-size:14.5px;line-height:1.5;color:var(--muted)}
+.thumb{display:block;aspect-ratio:1;overflow:hidden;border-radius:8px;background:var(--line)}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .meta{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--muted);margin-bottom:6px}
 .num{font-family:Georgia,serif;font-size:13px}
@@ -49,7 +59,7 @@ h2 a{text-decoration:none}h2 a:hover{color:var(--accent)}
 .pager a{color:var(--muted);text-decoration:none}
 .archive{list-style:none;padding:0;margin:20px 0}.archive li{padding:8px 0;border-bottom:1px solid var(--line)}
 footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-@media (max-width:600px){.item{grid-template-columns:1fr}.thumb{aspect-ratio:16/9}}
+@media (max-width:760px){.shorts{grid-template-columns:1fr}.long h2{font-size:22px}.long .body p{font-size:16px}}
 </style>
 </head>
 <body>
@@ -62,7 +72,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
   <h1 class="date"><span lang="en">{{DATE_LONG_EN}}</span><span lang="zh">{{DATE_LONG_ZH}}</span></h1>
   <div class="sub">{{BADGE}}<span>{{COUNT}} <span lang="en">items</span><span lang="zh">条</span></span></div>
   <p class="intro"><span lang="en">{{INTRO_EN}}</span><span lang="zh">{{INTRO_ZH}}</span></p>
-  <div class="topics"><a href="#ai">AI</a><a href="#tech"><span lang="en">Tech</span><span lang="zh">科技</span></a><a href="#crypto">Crypto</a><a href="#bio">Bio</a></div>
+  <div class="topics"><a href="#depth"><span lang="en">In depth</span><span lang="zh">深度</span></a><a href="#briefs"><span lang="en">Briefs</span><span lang="zh">简讯</span></a></div>
   {{SECTIONS}}
   <div class="pager">{{PREV}}{{NEXT}}</div>
 </main>

@@ -30,7 +30,7 @@ def auto_digest(cand, n=20):
         picked += by_topic.get(t, [])[:q]
     items = []
     for it in picked[:n]:
-        items.append({"id": it["id"], "topic": it["topic"], "url": it["url"], "source": it["source"], "image": it["image"],
+        items.append({"id": it["id"], "kind": "short", "topic": it["topic"], "url": it["url"], "source": it["source"], "image": it["image"],
                       "title_en": it["title"] if it["lang"] == "en" else "", "title_zh": it["title"] if it["lang"] == "zh" else "",
                       "summary_en": it["excerpt"][:280] if it["lang"] == "en" else "", "summary_zh": it["excerpt"][:160] if it["lang"] == "zh" else ""})
     return {"date": cand["date"], "curated": False, "items": items,
@@ -38,37 +38,53 @@ def auto_digest(cand, n=20):
             "intro_zh": "自动挑选的热门条目，本日尚未人工整理。"}
 
 
-def render_item(it, i):
-    ten, tzh = it.get("title_en") or it.get("title_zh"), it.get("title_zh") or it.get("title_en")
-    sen, szh = it.get("summary_en") or it.get("summary_zh"), it.get("summary_zh") or it.get("summary_en")
-    img = f'<a class="thumb" href="{esc(it["url"])}" target="_blank" rel="noopener"><img src="{esc(it["image"])}" alt="" loading="lazy" onerror="this.parentNode.remove()"></a>' if it.get("image") else ""
+def paras(text, lang):
+    return "".join(f'<p lang="{lang}">{esc(t.strip())}</p>' for t in (text or "").split("\n\n") if t.strip())
+
+
+def bilingual(en, zh, tag="span"):
+    en, zh = en or zh, zh or en
+    return f'<{tag} lang="en">{esc(en)}</{tag}><{tag} lang="zh">{esc(zh)}</{tag}>'
+
+
+def render_long(it, i):
     tag_en, tag_zh = TOPICS.get(it["topic"], (it["topic"], it["topic"]))
-    why = ""
-    if it.get("why_en") or it.get("why_zh"):
-        why = f'<p class="why"><span lang="en">{esc(it.get("why_en") or it.get("why_zh"))}</span><span lang="zh">{esc(it.get("why_zh") or it.get("why_en"))}</span></p>'
-    return f'''<article class="item" data-topic="{esc(it["topic"])}">
+    img = f'<a class="hero" href="{esc(it["url"])}" target="_blank" rel="noopener"><img src="{esc(it["image"])}" alt="" loading="lazy" onerror="this.parentNode.remove()"></a>' if it.get("image") else ""
+    why = f'<p class="why">{bilingual(it.get("why_en"), it.get("why_zh"))}</p>' if it.get("why_en") or it.get("why_zh") else ""
+    return f'''<article class="long" id="{esc(it["id"])}">
   {img}
-  <div class="body">
-    <div class="meta"><span class="num">{i:02d}</span><span class="tag {esc(it["topic"])}"><span lang="en">{tag_en}</span><span lang="zh">{tag_zh}</span></span><span class="src">{esc(it["source"])}</span></div>
-    <h2><a href="{esc(it["url"])}" target="_blank" rel="noopener"><span lang="en">{esc(ten)}</span><span lang="zh">{esc(tzh)}</span></a></h2>
-    <p class="sum"><span lang="en">{esc(sen)}</span><span lang="zh">{esc(szh)}</span></p>
-    {why}
+  <div class="meta"><span class="num">{i:02d}</span><span class="tag {esc(it["topic"])}"><span lang="en">{tag_en}</span><span lang="zh">{tag_zh}</span></span><span class="src">{esc(it["source"])}</span></div>
+  <h2><a href="{esc(it["url"])}" target="_blank" rel="noopener">{bilingual(it.get("title_en"), it.get("title_zh"))}</a></h2>
+  <div class="body">{paras(it.get("summary_en") or it.get("summary_zh"), "en")}{paras(it.get("summary_zh") or it.get("summary_en"), "zh")}</div>
+  {why}
+  <p class="more"><a href="{esc(it["url"])}" target="_blank" rel="noopener"><span lang="en">Read at {esc(it["source"])} &rarr;</span><span lang="zh">阅读原文（{esc(it["source"])}）&rarr;</span></a></p>
+</article>'''
+
+
+def render_short(it, i):
+    tag_en, tag_zh = TOPICS.get(it["topic"], (it["topic"], it["topic"]))
+    img = f'<a class="thumb" href="{esc(it["url"])}" target="_blank" rel="noopener"><img src="{esc(it["image"])}" alt="" loading="lazy" onerror="this.parentNode.remove()"></a>' if it.get("image") else ""
+    return f'''<article class="short" id="{esc(it["id"])}">
+  {img}
+  <div class="sbody">
+    <div class="meta"><span class="tag {esc(it["topic"])}"><span lang="en">{tag_en}</span><span lang="zh">{tag_zh}</span></span><span class="src">{esc(it["source"])}</span></div>
+    <h3><a href="{esc(it["url"])}" target="_blank" rel="noopener">{bilingual(it.get("title_en"), it.get("title_zh"))}</a></h3>
+    <p class="sum">{bilingual(it.get("summary_en"), it.get("summary_zh"))}</p>
   </div>
 </article>'''
 
 
 def render_page(d, dates, curated):
     items = d["items"]
-    order = ["ai", "tech", "crypto", "bio"]
-    items = sorted(items, key=lambda x: order.index(x["topic"]) if x["topic"] in order else 9)
+    longs = [it for it in items if it.get("kind") == "long"]
+    shorts = [it for it in items if it.get("kind") != "long"]
     sections = []
-    for t in order:
-        group = [it for it in items if it["topic"] == t]
-        if not group:
-            continue
-        en, zh = TOPICS[t]
-        sections.append(f'<section id="{t}"><h3 class="topic"><span lang="en">{en}</span><span lang="zh">{zh}</span><small>{len(group)}</small></h3>' +
-                        "".join(render_item(it, i) for i, it in enumerate(group, 1)) + "</section>")
+    if longs:
+        sections.append(f'<section id="depth"><h3 class="topic"><span lang="en">In depth</span><span lang="zh">深度</span><small>{len(longs)}</small></h3>' +
+                        "".join(render_long(it, i) for i, it in enumerate(longs, 1)) + "</section>")
+    if shorts:
+        sections.append(f'<section id="briefs"><h3 class="topic"><span lang="en">Briefs</span><span lang="zh">简讯</span><small>{len(shorts)}</small></h3><div class="shorts">' +
+                        "".join(render_short(it, i) for i, it in enumerate(shorts, 1)) + "</div></section>")
     idx = dates.index(d["date"])
     prev = f'<a href="{dates[idx+1]}.html">&larr; {dates[idx+1]}</a>' if idx + 1 < len(dates) else "<span></span>"
     nxt = f'<a href="{dates[idx-1]}.html">{dates[idx-1]} &rarr;</a>' if idx > 0 else "<span></span>"
