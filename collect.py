@@ -75,7 +75,7 @@ def fetch_feed(topic, src):
                 body = e["content"][0].get("value", body)
             items.append({
                 "topic": topic, "source": src["name"], "lang": src["lang"], "weight": src.get("weight", 1.0),
-                "title": html.unescape(title), "url": link, "canonical": clean_url(link),
+                "title": strip_html(title, 300), "url": link, "canonical": clean_url(link),
                 "published": entry_time(e), "excerpt": strip_html(body), "image": entry_image(e),
                 "comments": e.get("comments"),
             })

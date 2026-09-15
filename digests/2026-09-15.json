@@ -1,0 +1,242 @@
+{
+ "date": "2026-09-15",
+ "intro_en": "The AI industry spent the weekend arguing with itself about slowing down, while Nvidia's CEO said no with the President on speakerphone. Apple shipped its LLM Siri, the US admitted to weapons in orbit, the Clarity Act reaches the Senate floor, and a single brain implant now decodes speech and gestures together.",
+ "intro_zh": "AI 行业整个周末都在为“要不要放慢”争论，英伟达 CEO 则当着总统的面说不。苹果推送了大模型版 Siri，美军承认在轨部署武器，《Clarity 法案》进入参议院表决，一枚脑机接口首次同时解码语言与手势。",
+ "items": [
+  {
+   "id": "74b73d1a2e",
+   "topic": "ai",
+   "source": "Ars Technica",
+   "url": "https://arstechnica.com/ai/2026/09/ai-leaders-want-to-hit-the-brakes-after-years-of-reckless-speed/",
+   "image": "https://cdn.arstechnica.net/wp-content/uploads/2026/09/GettyImages-1482639221-1152x648-1789407457.jpg",
+   "title_en": "AI labs call for slowing frontier development after years of racing",
+   "title_zh": "AI 巨头集体呼吁放慢前沿模型研发",
+   "summary_en": "Anthropic CEO Dario Amodei published a nearly 4,000-word essay arguing the industry must slow the pace of capability gains to avoid a commercially driven race to the bottom. Within hours Sam Altman, Demis Hassabis, Satya Nadella and even Elon Musk publicly agreed, and Microsoft followed with a formal 'humanist AI' code of conduct for its models. The Verge notes skeptics see a possible cartel: incumbents locking in their lead while squeezing open-source rivals.",
+   "summary_zh": "Anthropic CEO Dario Amodei 发表近 4000 字长文，主张行业必须放慢模型能力的提升速度，避免被商业竞争拖入危险的“逐底竞赛”。数小时内，Sam Altman、Demis Hassabis、Satya Nadella 乃至 Elon Musk 都公开表态赞同，微软随后发布了一份约束自家模型的“人本 AI”行为准则。The Verge 指出，质疑者担心这可能是一种变相的卡特尔：领先者巩固优势，同时挤压开源竞争者。",
+   "why_en": "The single biggest story of the weekend. Read alongside the Nvidia item below for the counter-view.",
+   "why_zh": "本周末最重要的一条新闻。建议与下面英伟达的表态对照阅读。"
+  },
+  {
+   "id": "e957c50798",
+   "topic": "ai",
+   "source": "TechCrunch",
+   "url": "https://techcrunch.com/2026/09/14/nvidia-ceo-jensen-huang-tells-trump-were-not-going-to-let-an-ai-slowdown-happen/",
+   "image": "https://techcrunch.com/wp-content/uploads/2026/01/GettyImages-2256813240.jpg?resize=1200,800",
+   "title_en": "Jensen Huang, with Trump on speakerphone, rejects an AI slowdown",
+   "title_zh": "黄仁勋当众接特朗普电话：不会让 AI 放缓发生",
+   "summary_en": "Onstage at the All-In Summit, Nvidia's CEO took a live call from President Trump and put it on speaker, telling him 'we're not going to let it happen' in response to the slowdown calls. Huang argued a pause would play into the hands of rivals. Separately, Chinese outlets relayed a report that Nvidia, Palantir and Booz Allen have restricted internal use of Anthropic's Claude over concerns about proprietary code reaching an external model provider.",
+   "summary_zh": "在 All-In 峰会现场，英伟达 CEO 黄仁勋接到特朗普来电并当场外放，针对“放慢 AI”的呼声表示“我们不会让它发生”，认为暂停只会让对手得利。另据雷锋网转引外媒报道，英伟达、Palantir 和 Booz Allen 已限制员工内部使用 Anthropic 的 Claude，主要担心内部代码等敏感信息流入外部模型供应商。"
+  },
+  {
+   "id": "c6517bed48",
+   "topic": "ai",
+   "source": "MIT Technology Review",
+   "url": "https://www.technologyreview.com/2026/09/14/1144037/ai-agents-blew-whistle-o-cheating-colleagues/",
+   "image": "https://wp.technologyreview.com/wp-content/uploads/2026/09/260911_AIangentscheating.jpg?resize=1200,600",
+   "title_en": "DeepMind swarm experiment: AI agents blew the whistle on cheating peers",
+   "title_zh": "DeepMind 群体实验：AI 智能体举报作弊同伴",
+   "summary_en": "Google DeepMind set 100 agents, prompted as math researchers at a conference, loose on 71 hard problems. Some agents cheated, others accused them, complained to the organizers and at one point boycotted the event. It is the first documented case of spontaneous whistleblowing among AI agents, and MIT Technology Review frames it as relevant to keeping large autonomous swarms aligned.",
+   "summary_zh": "Google DeepMind 让 100 个被设定为“数学会议研究员”的智能体合作求解 71 道难题。部分智能体作弊，另一些则出面指控、向“组织方”投诉，甚至一度集体抵制。这是首次记录到 AI 智能体之间自发的“吹哨”行为，MIT 科技评论认为这对未来管理大规模自主智能体群体有直接意义。"
+  },
+  {
+   "id": "fbf3222df4",
+   "topic": "ai",
+   "source": "TechCrunch",
+   "url": "https://techcrunch.com/2026/09/14/openai-buys-smartphone-camera-maker-glass-imaging-for-300-million-report-says/",
+   "image": "https://techcrunch.com/wp-content/uploads/2026/09/GettyImages-1252369470.jpg?resize=1200,802",
+   "title_en": "OpenAI reportedly buys camera startup Glass Imaging for over $300M",
+   "title_zh": "OpenAI 据报以 3 亿多美元收购相机初创公司 Glass Imaging",
+   "summary_en": "The Wall Street Journal reports OpenAI has acquired Glass Imaging, a Los Altos startup founded by two former Apple engineers who led the Portrait Mode team. Glass uses neural networks tuned to specific camera hardware to produce better images at capture time rather than in post. The deal fits OpenAI's rumored push into phones, earbuds and companion devices with Jony Ive's io team.",
+   "summary_zh": "《华尔街日报》报道，OpenAI 已收购位于加州 Los Altos 的 Glass Imaging，创始人是曾主导苹果人像模式团队的两位前苹果工程师。该公司用针对具体相机硬件训练的神经网络，在拍摄瞬间而非后期提升成像质量。这笔交易与 OpenAI 联合 Jony Ive 的 io 团队进军手机、耳机等硬件的传闻相吻合。"
+  },
+  {
+   "id": "c8644cccef",
+   "topic": "ai",
+   "source": "雷锋网",
+   "url": "https://www.leiphone.com/category/yanxishe/N5vgkP1Vl7gHCjYr.html",
+   "image": "https://static.leiphone.com/uploads/new/images/20260915/6aa8b4ebe58da.jpg?imageMogr2/quality/90",
+   "title_en": "Nvidia open-sources SoL-Pi, a self-optimizing harness for agent workflows",
+   "title_zh": "英伟达开源 SoL-Pi：让 AI 自己给智能体工作流“抓浪费”",
+   "summary_en": "Nvidia released SoL-Pi, built on the open-source Pi project, which uses AI to audit long-running agent workflows for wasted tokens and redundant tool calls and then patches them. The team had AI propose 152 optimization ideas and kept the four that survived an automated evaluation pipeline. Nvidia claims up to 64% fewer tokens and a 50 to 54% cut in API cost.",
+   "summary_zh": "英伟达开源了基于 Pi 项目改造的 SoL-Pi，它让 AI 充当“监工”，审查长周期智能体工作流中的冗余上下文和多余工具调用并自动修复。团队让 AI 提出了 152 个优化思路，经自动化流水线层层淘汰后只保留 4 个机制。官方称 Token 消耗最多减少 64%，API 成本下降 50% 至 54%。"
+  },
+  {
+   "id": "f95e790699",
+   "topic": "ai",
+   "source": "量子位",
+   "url": "https://www.qbitai.com/2026/09/489227.html",
+   "image": null,
+   "title_en": "Seven PhD students train a 7B model from scratch in three months, fully open",
+   "title_zh": "7 名博士生 3 个月从零训出 7B 模型，代码、数据、日志全公开",
+   "summary_en": "A student team built ZGCM-1, a 7B model aimed at math and agentic search, and released weights, data recipes, training code, checkpoints and logs. They coordinated a few hundred AI agents split into data, experiment and evaluation sub-teams, and report performance close to Qwen3-8B on general benchmarks. The writeup is candid about a silent data-shuffling bug that degraded the model while loss kept falling.",
+   "summary_zh": "一支学生团队从零训练了面向数学与智能体搜索的 7B 模型 ZGCM-1，并开放了权重、数据配方、训练代码、中间 checkpoint 和日志。他们调度数百个 AI 智能体，分成数据、实验、评测等子团队协作。通用评测上与 Qwen3-8B 相近。文章坦率记录了一次数据分片 shuffle 出错导致 loss 正常下降但能力悄然退化的教训。",
+   "why_en": "A rare end-to-end, warts-and-all account of pretraining. The arXiv paper is also in today's feed.",
+   "why_zh": "少见的完整、不回避失败的预训练实录，arXiv 论文也在今天的候选中。"
+  },
+  {
+   "id": "7df04c7f4e",
+   "topic": "tech",
+   "source": "Ars Technica",
+   "url": "https://arstechnica.com/apple/2026/09/apple-releases-ios-27-macos-golden-gate-27-with-siri-ai-and-liquid-glass-refinements/",
+   "image": "https://cdn.arstechnica.net/wp-content/uploads/2026/09/Apple-OS-27-1152x648-1789411862.jpg",
+   "title_en": "Apple ships iOS 27 and macOS 27 Golden Gate with the LLM-based Siri",
+   "title_zh": "苹果正式推送 iOS 27 与 macOS 27，大模型版 Siri 登场",
+   "summary_en": "Apple released its 2026 operating systems: iOS 27, iPadOS 27, macOS 27 Golden Gate, watchOS 27 and visionOS 27. The headline feature everywhere except tvOS is Siri AI, a context-aware, large-language-model rebuild of the assistant, plus refinements to last year's Liquid Glass design. TechCrunch's reviewer says the new Siri got them using the assistant again.",
+   "summary_zh": "苹果发布了 2026 年度系统更新：iOS 27、iPadOS 27、macOS 27 Golden Gate、watchOS 27 和 visionOS 27。除 tvOS 外，各平台的主打功能都是基于大语言模型、能理解上下文的全新 Siri，另有对 Liquid Glass 设计的打磨。TechCrunch 评测称新 Siri 让人重新愿意用语音助手。"
+  },
+  {
+   "id": "45fb01f753",
+   "topic": "tech",
+   "source": "Ars Technica",
+   "url": "https://arstechnica.com/gaming/2026/09/steam-frame-the-ars-technica-review/",
+   "image": "https://cdn.arstechnica.net/wp-content/uploads/2026/09/sfcrop1-1-1152x648-1789413217.jpg",
+   "title_en": "Valve's $1,059 Steam Frame headset: light, well built, and a strange bet",
+   "title_zh": "Valve 推出 1059 美元 Steam Frame 头显：轻巧精良，却是一场奇怪的押注",
+   "summary_en": "Valve opened reservations for the Steam Frame, a standalone VR headset starting at $1,059. Ars Technica's week-long review praises the 440 g weight, about 15% lighter than a Quest 3, but finds the device 'simultaneously overengineered and underbaked'. The Hacker News thread drew over 600 points and nearly 500 comments, most of them about the price.",
+   "summary_zh": "Valve 开放 Steam Frame 独立 VR 头显预订，起售价 1059 美元。Ars Technica 一周体验后称赞其 440 克的重量（比 Quest 3 轻约 15%），但认为产品“既过度工程化又不够成熟”。Hacker News 上相关帖子获得 600 多点赞、近 500 条评论，讨论焦点是定价。"
+  },
+  {
+   "id": "6b841b3013",
+   "topic": "tech",
+   "source": "Ars Technica",
+   "url": "https://arstechnica.com/space/2026/09/for-the-first-time-the-us-military-confirms-it-has-deployed-weapons-in-orbit/",
+   "image": "https://cdn.arstechnica.net/wp-content/uploads/2026/09/9718607-1152x648.jpg",
+   "title_en": "US military publicly confirms weapons in orbit for the first time",
+   "title_zh": "美军首次公开承认已在轨道部署武器",
+   "summary_en": "Air Force Secretary Troy Meink told the Air, Space & Cyber Conference that the United States 'now has on-orbit space control weapons capable of defending the joint force against hostile adversary action'. He gave no details, citing deterrence. Ars Technica notes the statement marks a sharp turn from years in which no senior official would discuss orbital weapons publicly.",
+   "summary_zh": "美国空军部长 Troy Meink 在 Air, Space & Cyber 大会上表示，美国“目前已拥有在轨太空控制武器，可保护联合部队免受敌对行动”。他以威慑为由未透露任何细节。Ars Technica 指出，这一表态与过去多年高层拒绝公开讨论轨道武器的态度形成鲜明对比。"
+  },
+  {
+   "id": "96d641d659",
+   "topic": "tech",
+   "source": "TechCrunch",
+   "url": "https://techcrunch.com/2026/09/14/waymo-opens-robotaxi-service-in-las-vegas/",
+   "image": "https://techcrunch.com/wp-content/uploads/2026/09/waymo-ojai-street.jpg?resize=1200,801",
+   "title_en": "Waymo opens robotaxi service in Las Vegas, its 15th market",
+   "title_zh": "Waymo 在拉斯维加斯开放无人出租车服务，第 15 个城市",
+   "summary_en": "Weeks after Nevada regulators gave final approval, Waymo began inviting public riders in Las Vegas with 'dozens' of its new Ojai minivans covering the Strip south of Highway 589 into Boulder Junction. Access is invite-only for now, following the playbook used in 14 other cities. Zoox already operates commercially in Las Vegas, and Tesla and Motional plan to launch there.",
+   "summary_zh": "在获得内华达州监管部门最终批准数周后，Waymo 开始在拉斯维加斯邀请公众乘车，首批投放“数十辆”新款 Ojai 厢式车，服务范围覆盖 589 号公路以南的长街至 Boulder Junction。目前仍为邀请制，沿用其在其他 14 个城市的推广套路。Zoox 已在当地商业运营，特斯拉和 Motional 也计划进入。"
+  },
+  {
+   "id": "a2df8564a3",
+   "topic": "tech",
+   "source": "IT之家",
+   "url": "https://www.ithome.com/1/002/612.htm",
+   "image": "https://img.ithome.com/newsuploadfiles/2026/9/43b9307b-2109-4e14-93ec-48edab41da71.jpg?x-bce-process=image/format,f_auto",
+   "title_en": "MediaTek launches Dimensity 9600 Pro on 2nm with 4.55 GHz cores",
+   "title_zh": "联发科发布天玑 9600 Pro：2nm 工艺，4.55GHz 超大核",
+   "summary_en": "MediaTek's new flagship is among the first phone chips on TSMC's 2 nm process, packing over 33 billion transistors, two 4.55 GHz C2-Ultra cores and support for LPDDR6 and UFS 5.0. MediaTek claims 17% better single-core and 15% better multi-core performance than the 9500, 48% lower power in 1080p video playback, and 120 fps ray-traced mobile gaming. OPPO's Find X10 Pro Max is the first announced phone.",
+   "summary_zh": "联发科新旗舰是首批采用台积电 2nm 制程的手机芯片之一，晶体管超过 330 亿，配备两颗 4.55GHz C2-Ultra 超大核，支持 LPDDR6 内存和 UFS 5.0 闪存。官方称单核性能较天玑 9500 提升 17%、多核提升 15%，1080p 在线视频功耗下降 48%，支持 120 帧光追手游。OPPO Find X10 Pro Max 已官宣首发。"
+  },
+  {
+   "id": "0cbcfb9569",
+   "topic": "tech",
+   "source": "Hacker News",
+   "url": "https://www.omgubuntu.co.uk/2026/09/ubuntu-2610-rust-coreutils-complete",
+   "image": "https://www.omgubuntu.co.uk/wp-content/uploads/2025/05/ubuntu-rust.jpg",
+   "title_en": "Ubuntu 26.10 completes the switch to Rust-based coreutils",
+   "title_zh": "Ubuntu 26.10 完成向 Rust 版 coreutils 的迁移",
+   "summary_en": "The upcoming 'Stonking Stingray' release ships the full uutils set, including cp, mv and rm, which were held back on GNU versions in 26.04 LTS because of time-of-check-to-time-of-use bugs found in a Canonical-commissioned audit. Users should see no functional difference; the goal is memory safety. Canonical also funds a Rust rewrite of NTP it plans to make default by 27.10.",
+   "summary_zh": "即将发布的 Ubuntu 26.10 “Stonking Stingray”将完整采用 Rust 编写的 uutils 核心工具，包括此前因审计发现 TOCTOU 漏洞而在 26.04 LTS 中保留 GNU 版本的 cp、mv 和 rm。对用户来说功能上没有区别，目的在于内存安全。Canonical 还在资助 NTP 的 Rust 重写，计划在 27.10 中默认启用。"
+  },
+  {
+   "id": "b8d229a865",
+   "topic": "crypto",
+   "source": "The Block",
+   "url": "https://www.theblock.co/news/regulation/2026-09-14-where-the-clarity-act-stands-ahead-of-tuesdays-senate-vote-414720",
+   "image": "https://www.tbstat.com/wp/uploads/2022/01/20210120_Capitol_Generic-1200x675.jpg",
+   "title_en": "Clarity Act heads to a Senate cloture vote as Bitcoin slips below $80K",
+   "title_zh": "《Clarity 法案》迎来参议院程序性表决，比特币回落至 8 万美元下方",
+   "summary_en": "Senate Republicans released a 'final' 630-page draft folding in Democratic provisions and ethics terms Trump agreed to, ahead of Tuesday's cloture vote that needs 60 votes. Democrats sent a counteroffer, 17 state attorneys general urged rejection, and market-implied odds of passage this year sit around 30%. Bitcoin drifted to about $77,800 with thin leverage, and the Fed decides on rates the following day.",
+   "summary_zh": "参议院共和党人公布了长达 630 页的“最终”草案，纳入了多项民主党条款以及特朗普接受的道德约束条款，周二的程序性表决需要 60 票。民主党提出反提案，17 个州的总检察长联名反对，市场隐含的年内通过概率约为 30%。比特币在杠杆稀薄的情况下回落至约 77800 美元，次日美联储还将公布利率决议。"
+  },
+  {
+   "id": "b71ca58842",
+   "topic": "crypto",
+   "source": "CoinDesk",
+   "url": "https://www.coindesk.com/tech/2026/09/15/solana-transactions-just-got-more-than-3-times-bigger-giving-an-edge-over-ethereum",
+   "image": "https://cdn.sanity.io/images/s3y3vcno/production/e6376ed45a3d412e45b43d8bef2b7e97998c05ab-5760x3240.jpg?fm=jpg&w=1920&h=1080&crop=focalpoint&fit=clip",
+   "title_en": "Solana's Transaction V1 triples the per-transaction data limit",
+   "title_zh": "Solana 交易 V1 格式上线，单笔数据上限扩大三倍以上",
+   "summary_en": "Solana's new Transaction V1 format went live, raising the maximum payload from 1,232 bytes to 4,096 bytes. The old hard cap throttled complex all-or-nothing operations such as multisig company wallets and zero-knowledge proofs, an area where Ethereum's flexible gas limit had an edge. Apps and data services must update to read V1, though older formats remain supported.",
+   "summary_zh": "Solana 新的 Transaction V1 格式已上线，单笔交易的数据上限从 1232 字节提高到 4096 字节。此前的硬上限限制了多签企业钱包、零知识证明等复杂的原子操作，而以太坊灵活的 gas 上限在这方面更有优势。应用和数据服务需要升级以解析 V1 交易，旧格式仍受支持。"
+  },
+  {
+   "id": "ddf774418b",
+   "topic": "crypto",
+   "source": "The Block",
+   "url": "https://www.theblock.co/news/business/2026-09-15-coinex-shut-down-414788",
+   "image": "https://www.tbstat.com/wp/uploads/2024/11/20241104_ZK-proofs_News_2-1200x675.jpg",
+   "title_en": "CoinEx to shut down after nine years, citing the market slump",
+   "title_zh": "交易所 CoinEx 运营九年后宣布关停，归因于市场萎缩",
+   "summary_en": "The exchange announced it will cease operations, citing a 'significant' contraction in the crypto market. CoinEx had operated since 2017 and was hit by a roughly $70 million hack in 2023. The closure lands the same day Balancer proposed winding itself down, adding to signs of consolidation among mid-tier venues.",
+   "summary_zh": "CoinEx 宣布将停止运营，理由是加密市场出现“显著”收缩。该交易所自 2017 年运营至今，2023 年曾遭遇约 7000 万美元的黑客攻击。同一天 Balancer 也提出解散提案，中型平台的出清迹象在增加。"
+  },
+  {
+   "id": "8f1ea967f6",
+   "topic": "crypto",
+   "source": "The Block",
+   "url": "https://www.theblock.co/news/defi/2026-09-15-balancer-proposes-winding-down-414782",
+   "image": "https://www.tbstat.com/wp/uploads/2021/05/20210511_Balancer_V2-1200x675.jpg",
+   "title_en": "Balancer proposes winding down and returning its treasury to BAL holders",
+   "title_zh": "Balancer 提议解散协议，将金库分配给 BAL 持有者",
+   "summary_en": "A governance proposal would wind down the veteran DeFi automated market maker and distribute its roughly $9 million treasury to BAL holders after a restructuring failed to revive revenue. Balancer was one of the earliest AMMs and suffered a major exploit last year. If passed, it is one of the most prominent voluntary shutdowns in DeFi to date.",
+   "summary_zh": "一项治理提案建议关停这家老牌 DeFi 自动做市商，并把约 900 万美元的金库分配给 BAL 持有者，原因是重组未能恢复收入。Balancer 是最早的 AMM 之一，去年曾遭遇重大攻击。若提案通过，将是 DeFi 领域迄今最知名的主动清算案例之一。"
+  },
+  {
+   "id": "b2adc15591",
+   "topic": "bio",
+   "source": "Nature",
+   "url": "https://www.nature.com/articles/d41586-026-02895-6",
+   "image": null,
+   "title_en": "One brain implant decodes speech and gestures at the same time",
+   "title_zh": "一枚脑机接口同时解码语言与手势",
+   "summary_en": "A neural device described in Nature and Science reads intended words and hand gestures simultaneously from a single brain area, letting paralyzed participants both talk and gesture through an avatar in real time. Previous implants handled one channel at a time. The authors present it as a step toward more natural communication for people who have lost speech.",
+   "summary_zh": "《自然》与《科学》同时报道了一种神经植入设备，可从同一脑区实时解码患者想说的话和想做的手势，让瘫痪参与者通过虚拟形象同时说话和比划。此前的植入物一次只能处理一种信号。作者认为这是让失语患者实现更自然交流的重要一步。"
+  },
+  {
+   "id": "7f010f04f3",
+   "topic": "bio",
+   "source": "BioPharma Dive",
+   "url": "https://www.biopharmadive.com/news/scholar-rock-sma-drug-isemblyd-fda-approve/830232/",
+   "image": "https://imgproxy.divecdn.com/jwQkg-wzyofiJL5d7k24n0j3Xb2TKl03YT8PmHJpsMs/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9JU0VNQllMRC5qcGc=.webp",
+   "title_en": "FDA approves Scholar Rock's Isembyld, first muscle-targeted SMA drug",
+   "title_zh": "FDA 批准 Scholar Rock 的 Isembyld，首款靶向肌肉的 SMA 药物",
+   "summary_en": "The FDA approved Isembyld for spinal muscular atrophy. Unlike existing therapies that act on the SMN gene, it targets muscle directly and in trials improved motor function in patients already on standard treatment. Some analysts project blockbuster sales.",
+   "summary_zh": "FDA 批准 Isembyld 用于治疗脊髓性肌萎缩症。与现有作用于 SMN 基因的疗法不同，它直接靶向肌肉，临床试验中让已接受标准治疗的患者运动功能进一步改善。部分分析师预计其将成为重磅药物。"
+  },
+  {
+   "id": "462e617d3d",
+   "topic": "bio",
+   "source": "BioPharma Dive",
+   "url": "https://www.biopharmadive.com/news/astrazeneca-etcamah-first-line-breast-cancer-study-results/830266/",
+   "image": "https://imgproxy.divecdn.com/Fjzr5kjcLeZ_A2pzstCyxTNQnZ-ZrmOt89UiifKXUfo/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS8yREI1VzA4LmpwZw==.webp",
+   "title_en": "AstraZeneca's newly approved etcamah fails in first-line breast cancer",
+   "title_zh": "阿斯利康新获批的 etcamah 在一线乳腺癌试验中失利",
+   "summary_en": "Weeks after approval in a later-line setting, AstraZeneca's oral SERD etcamah missed in a frontline breast cancer study. It is the second oral SERD to stumble in first-line disease this year after a similar setback at Roche, raising doubts about how far the class can move up the treatment sequence.",
+   "summary_zh": "阿斯利康的口服 SERD 药物 etcamah 刚在后线适应症获批数周，便在一线乳腺癌研究中未达终点。这是今年继罗氏之后第二款在一线治疗中受挫的口服 SERD，令人质疑该类药物能否前移到更早的治疗线。"
+  },
+  {
+   "id": "a2d1b1f331",
+   "topic": "bio",
+   "source": "Nature",
+   "url": "https://www.nature.com/articles/d41586-026-02882-x",
+   "image": null,
+   "title_en": "Pharma's private protein structures give AI folding models a big boost",
+   "title_zh": "药企私有蛋白结构数据显著提升 AI 折叠模型",
+   "summary_en": "A consortium of drug companies trained a model on OpenFold3, an open replication of AlphaFold 3, using more than 20,000 proprietary protein structures. It outperformed models trained only on public data and those trained on any single firm's silo. The result is a blog post, not yet peer reviewed, and the model is not public, but it suggests AlphaFold-style models are data-limited rather than architecture-limited.",
+   "summary_zh": "多家药企组成的联盟基于 AlphaFold 3 的开源复现 OpenFold3，用 2 万多个专有蛋白结构训练了新模型，表现优于仅用公开数据训练的模型，也优于任一单家公司数据训练的版本。目前只是博客文章、未经同行评审，模型也不公开，但它表明 AlphaFold 类模型的瓶颈在数据而非架构。"
+  },
+  {
+   "id": "e742b31e5a",
+   "topic": "bio",
+   "source": "MIT Technology Review",
+   "url": "https://www.technologyreview.com/2026/09/14/1144010/donated-livers-can-be-made-biologically-younger/",
+   "image": "https://wp.technologyreview.com/wp-content/uploads/2026/09/liver-perfusion.jpg?resize=1200,600",
+   "title_en": "Machine perfusion appears to make donated livers biologically younger",
+   "title_zh": "机器灌注让捐献肝脏在分子层面“变年轻”",
+   "summary_en": "Researchers at Mass General Brigham applied aging clocks to donated livers kept on perfusion machines, which pump organs with nutrients for six to twelve hours before transplant. The organs' biological age dropped at the molecular level, which may explain why perfused organs fail less often. The team hopes to use the finding to rescue organs that would otherwise be discarded.",
+   "summary_zh": "麻省总医院布莱根团队用“衰老时钟”评估经机器灌注的捐献肝脏，这类设备会在移植前为器官泵送营养 6 至 12 小时。结果显示器官在分子层面的生物学年龄下降，这或许能解释灌注后的器官为何更少失败。研究者希望据此挽救原本会被弃用的器官。"
+  }
+ ]
+}
