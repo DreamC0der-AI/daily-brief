@@ -60,7 +60,8 @@ h2 a{text-decoration:none}h2 a:hover{color:var(--accent)}
 .pager{display:flex;justify-content:space-between;margin-top:40px;font-size:14px}
 .pager a{color:var(--muted);text-decoration:none}
 .archive{list-style:none;padding:0;margin:20px 0}.archive li{padding:8px 0;border-bottom:1px solid var(--line)}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+footer{color:var(--muted);font-size:12px;padding:20px 16px 40px;max-width:920px;margin:0 auto;border-top:1px solid var(--line)}
+footer .notice{font-size:13px;line-height:1.55;margin:0 0 10px}footer a{color:var(--muted)}
 @media (max-width:760px){.shorts{grid-template-columns:1fr}.long h2{font-size:22px}.long .body p{font-size:16px}}
 </style>
 </head>
@@ -78,7 +79,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
   {{SECTIONS}}
   <div class="pager">{{PREV}}{{NEXT}}</div>
 </main>
-<footer>Built from public RSS feeds. Summaries written by Claude Code.</footer>
+<footer>
+  <p class="notice"><span lang="en"><strong>Personal, non-commercial use only.</strong> Daily Brief is a private reading digest for one person. It carries no advertising, sells nothing, and collects no data. Headlines and summaries are written in our own words from publicly available RSS feeds; every article and image remains the property of its original publisher and is linked to its source. Rights holders who want an item removed can <a href="https://github.com/DreamC0der-AI/daily-brief/issues" target="_blank" rel="noopener">open an issue</a> and it will be taken down promptly.</span><span lang="zh"><strong>仅供个人非商业使用。</strong>Daily Brief 是一个人的私人阅读摘要，不含广告、不销售任何内容、不收集数据。标题与摘要基于公开 RSS 源，以我们自己的语言撰写；所有文章和图片的版权归原出版方所有，并均链接至原始来源。权利人如需删除某条内容，可在 <a href="https://github.com/DreamC0der-AI/daily-brief/issues" target="_blank" rel="noopener">GitHub 提交 issue</a>，我们将及时处理。</span></p>
+  <p>Built from public RSS feeds · Summaries written by Claude Code · <a href="https://github.com/DreamC0der-AI/daily-brief" target="_blank" rel="noopener">Source</a></p>
+</footer>
 <script>
 (function(){var r=document.documentElement,k='dailybrief-lang';
 function set(l){r.setAttribute('data-lang',l);r.lang=l==='zh'?'zh-CN':'en';try{localStorage.setItem(k,l)}catch(e){}
