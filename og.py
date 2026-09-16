@@ -1,7 +1,8 @@
 """Generate 1200x630 social preview cards (one per day per language) and QR codes."""
 import io
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
+import requests
 import qrcode, qrcode.image.svg
 
 W, H = 1200, 630
@@ -89,6 +90,29 @@ def square(date_short, headline, lang, out_path):
         y += 40 if lang == "zh" else 38
     d.text((32, S - 48), "中文版" if lang == "zh" else "dreamc0der-ai.github.io", font=font(CJK if lang == "zh" else SANS, 18), fill=MUTED)
     img.save(out_path, "PNG", optimize=True)
+
+
+UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36"}
+
+
+def fetch_photo(url):
+    """Download a lead photo; return a PIL image or None if it fails or is too small."""
+    try:
+        r = requests.get(url, headers=UA, timeout=15)
+        r.raise_for_status()
+        img = Image.open(io.BytesIO(r.content))
+        img.load()
+        if min(img.size) < 300:
+            return None
+        return img.convert("RGB")
+    except Exception:
+        return None
+
+
+def photo_cards(photo, out_wide, out_square):
+    """Crop the lead photo to 1200x630 (link previews) and 400x400 (WeChat thumbnail)."""
+    ImageOps.fit(photo, (W, H), method=Image.LANCZOS, centering=(0.5, 0.4)).save(out_wide, "JPEG", quality=85, optimize=True)
+    ImageOps.fit(photo, (400, 400), method=Image.LANCZOS, centering=(0.5, 0.4)).save(out_square, "JPEG", quality=85, optimize=True)
 
 
 def qr_svg(url):

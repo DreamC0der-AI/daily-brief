@@ -127,8 +127,9 @@ def render_page(d, dates, curated, lang):
     headlines = [pick(it, "title", lang) for it in (longs or shorts)[:3]]
     share_title = f"{s['site_title']} · {label}"
     share_text = share_title + "\n\n" + "\n".join(f"{i}. {h}" for i, h in enumerate(headlines, 1))
-    og_img = f"og/{date}.{lang}.png"
-    sq_img = f"og/{date}.{lang}.sq.png"
+    ext = "jpg" if d.get("_photo") else "png"
+    og_img = f"og/{date}.{lang}.{ext}"
+    sq_img = f"og/{date}.{lang}.sq.{ext}"
     desc = intro if len(intro) < 200 else intro[:197] + "…"
     other = page_name(date, "zh" if lang == "en" else "en")
     repl = {
@@ -169,11 +170,17 @@ def main():
         raise SystemExit("nothing to build")
     for date in dates:
         d, is_cur = (curated[date], True) if date in curated else (auto_digest(load_json(cands[date])), False)
+        lead = next((it for it in d["items"] if it.get("kind") == "long" and it.get("image")), None) or \
+               next((it for it in d["items"] if it.get("image")), None)
+        d["_photo"] = og.fetch_photo(lead["image"]) if lead else None
         for lang in ("en", "zh"):
             page, (label, headlines, og_img, sq_img) = render_page(d, dates, is_cur, lang)
             (SITE / page_name(date, lang)).write_text(page)
-            og.card(label, headlines, lang, SITE / og_img)
-            og.square(date if lang == "en" else label, headlines[0] if headlines else "", lang, SITE / sq_img)
+            if d["_photo"]:
+                og.photo_cards(d["_photo"], SITE / og_img, SITE / sq_img)
+            else:
+                og.card(label, headlines, lang, SITE / og_img)
+                og.square(date if lang == "en" else label, headlines[0] if headlines else "", lang, SITE / sq_img)
             if date == dates[0]:
                 # index pages: same content, plus a one-time language redirect on the English landing page
                 idx = page
