@@ -94,12 +94,20 @@ dialog.share::backdrop{background:rgba(0,0,0,.45)}
 .sh .wx svg{width:180px;height:180px;background:#fff;padding:8px;border-radius:8px}
 .sh .wx p{font-size:12px;color:var(--muted);margin:8px 0 0}
 .sh .close{position:absolute;top:10px;right:12px;border:0;background:none;color:var(--muted);font-size:20px;cursor:pointer}
+.wx-thumb{position:absolute;width:0;height:0;overflow:hidden}
+.wx-guide{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:30;display:none;color:#fff;font-size:17px;line-height:1.6}
+.wx-guide.on{display:block}
+.wx-guide .arrow{position:absolute;top:10px;right:22px;font-size:40px;line-height:1}
+.wx-guide .txt{position:absolute;top:70px;right:20px;left:20px;text-align:right}
+.wx-guide .txt b{display:block;font-size:20px;margin-bottom:6px}
+.wx-guide .txt small{display:block;opacity:.8;font-size:14px;margin-top:10px}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
 .toast.on{opacity:1}
 @media (max-width:760px){.shorts{grid-template-columns:1fr}.long h2{font-size:22px}.long .body p{font-size:16px}}
 </style>
 </head>
 <body>
+<div class="wx-thumb" aria-hidden="true"><img src="{{SQ_IMAGE}}" width="400" height="400" alt=""></div>
 <header><div class="bar">
   <a class="brand" href="{{INDEX_HREF}}">Daily<em>Brief</em></a>
   <nav>
@@ -142,6 +150,7 @@ dialog.share::backdrop{background:rgba(0,0,0,.45)}
 </dialog>
 <template id="qr-page">{{PAGE_QR}}</template>
 <div class="toast" id="toast"></div>
+<div class="wx-guide" id="wx-guide"><div class="arrow">↗</div><div class="txt"><b>{{WX_GUIDE_TITLE}}</b>{{WX_GUIDE_TEXT}}<small>{{WX_GUIDE_TAP}}</small></div></div>
 
 <script>
 (function(){
@@ -169,7 +178,11 @@ dialog.share::backdrop{background:rgba(0,0,0,.45)}
   document.querySelectorAll('.share-btn').forEach(function(b){b.addEventListener('click',function(){open(b)})});
   document.getElementById('share-close').onclick=function(){dlg.close()};
   dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
-  dlg.querySelector('[data-net=wechat]').onclick=function(){wx.classList.toggle('on');copy(cur.url).then(function(){say(dlg.dataset.tCopied)})};
+  var inWeChat=/MicroMessenger/i.test(navigator.userAgent), guide=document.getElementById('wx-guide');
+  guide.onclick=function(){guide.classList.remove('on')};
+  dlg.querySelector('[data-net=wechat]').onclick=function(){
+    if(inWeChat){dlg.close();guide.classList.add('on');return}
+    wx.classList.toggle('on');copy(cur.url).then(function(){say(dlg.dataset.tCopied)})};
   dlg.querySelector('[data-net=copy]').onclick=function(){copy(cur.url).then(function(){say(dlg.dataset.tCopied)})};
   dlg.querySelector('[data-net=copytext]').onclick=function(){copy(cur.text+'\n\n'+cur.url).then(function(){say(dlg.dataset.tCopied)})};
   document.getElementById('share-native').onclick=function(){navigator.share({title:cur.title,text:cur.text,url:cur.url}).catch(function(){})};

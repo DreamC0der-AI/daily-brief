@@ -71,6 +71,26 @@ def card(date_label, headlines, lang, out_path):
     img.save(out_path, "PNG", optimize=True)
 
 
+def square(date_short, headline, lang, out_path):
+    """400x400 thumbnail WeChat uses for chat/Moments cards (first image >=300px on the page)."""
+    S = 400
+    img = Image.new("RGB", (S, S), BG)
+    d = ImageDraw.Draw(img)
+    brand = font(SERIF, 44)
+    d.text((32, 34), "Daily", font=brand, fill=FG)
+    d.text((32 + d.textlength("Daily", font=brand), 34), "Brief", font=brand, fill=ACCENT)
+    df = font(CJK if lang == "zh" else SANS, 22)
+    d.text((32, 92), date_short, font=df, fill=MUTED)
+    d.line((32, 128, S - 32, 128), fill=(60, 58, 52), width=2)
+    hf = font(CJK if lang == "zh" else SERIF, 30 if lang == "zh" else 28)
+    y = 150
+    for ln in wrap(d, headline, hf, S - 64, 5):
+        d.text((32, y), ln, font=hf, fill=FG)
+        y += 40 if lang == "zh" else 38
+    d.text((32, S - 48), "中文版" if lang == "zh" else "dreamc0der-ai.github.io", font=font(CJK if lang == "zh" else SANS, 18), fill=MUTED)
+    img.save(out_path, "PNG", optimize=True)
+
+
 def qr_svg(url):
     """Compact inline SVG QR code as a string."""
     q = qrcode.QRCode(border=1, error_correction=qrcode.constants.ERROR_CORRECT_M)

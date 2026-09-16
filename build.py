@@ -17,11 +17,11 @@ T = {  # UI strings
     "en": dict(archive="Archive", share="Share", indepth="In depth", briefs="Briefs", items="items", curated="curated", auto="auto",
                readat="Read at {src} →", share_page="Share today's brief", share_item="Share this story", wechat="WeChat", wechat_hint="Scan in WeChat, or copy the link and paste it into a chat",
                copy="Copy link", copied="Copied", copytext="Copy text", native="More…", other_lang="中文", intro_auto="Automatic pick of top feed items. No curated digest has been written for this day yet.",
-               site_title="Daily Brief", desc_suffix=""),
+               site_title="Daily Brief", desc_suffix="", wx_guide_title="Share from WeChat's own menu", wx_guide_text="Tap the ··· button in the top-right corner, then choose Share to Moments or Send to Chat. WeChat will build the card from this page.", wx_guide_tap="Tap anywhere to close"),
     "zh": dict(archive="往期", share="分享", indepth="深度", briefs="简讯", items="条", curated="人工整理", auto="自动",
                readat="阅读原文（{src}）→", share_page="分享今日简报", share_item="分享这条新闻", wechat="微信", wechat_hint="用微信扫一扫，或复制链接后粘贴到聊天中",
                copy="复制链接", copied="已复制", copytext="复制文字", native="更多…", other_lang="EN", intro_auto="自动挑选的热门条目，本日尚未人工整理。",
-               site_title="Daily Brief 每日简报", desc_suffix=""),
+               site_title="Daily Brief 每日简报", desc_suffix="", wx_guide_title="请用微信右上角菜单分享", wx_guide_text="点击右上角的 ··· 按钮，选择“分享到朋友圈”或“发送给朋友”，微信会自动生成本页的卡片。", wx_guide_tap="点击任意位置关闭"),
 }
 
 
@@ -128,6 +128,7 @@ def render_page(d, dates, curated, lang):
     share_title = f"{s['site_title']} · {label}"
     share_text = share_title + "\n\n" + "\n".join(f"{i}. {h}" for i, h in enumerate(headlines, 1))
     og_img = f"og/{date}.{lang}.png"
+    sq_img = f"og/{date}.{lang}.sq.png"
     desc = intro if len(intro) < 200 else intro[:197] + "…"
     other = page_name(date, "zh" if lang == "en" else "en")
     repl = {
@@ -139,12 +140,12 @@ def render_page(d, dates, curated, lang):
         "{{PREV}}": prev, "{{NEXT}}": nxt, "{{SHARE_TITLE}}": esc(share_title), "{{SHARE_TEXT}}": esc(share_text),
         "{{SHARE_PAGE}}": s["share_page"], "{{SHARE_ITEM}}": s["share_item"], "{{WECHAT}}": s["wechat"], "{{WECHAT_HINT}}": s["wechat_hint"],
         "{{COPY}}": s["copy"], "{{COPIED}}": s["copied"], "{{COPYTEXT}}": s["copytext"], "{{NATIVE}}": s["native"],
-        "{{PAGE_QR}}": og.qr_svg(page_url), "{{ICON}}": ICON_SHARE, "{{INDEX_HREF}}": "index.html" if lang == "en" else "index.zh.html",
+        "{{PAGE_QR}}": og.qr_svg(page_url), "{{SQ_IMAGE}}": sq_img, "{{WX_GUIDE_TITLE}}": s["wx_guide_title"], "{{WX_GUIDE_TEXT}}": s["wx_guide_text"], "{{WX_GUIDE_TAP}}": s["wx_guide_tap"], "{{ICON}}": ICON_SHARE, "{{INDEX_HREF}}": "index.html" if lang == "en" else "index.zh.html",
     }
     out = TEMPLATE
     for k, v in repl.items():
         out = out.replace(k, v)
-    return out, (label, headlines, og_img)
+    return out, (label, headlines, og_img, sq_img)
 
 
 def render_archive(dates, curated):
@@ -169,9 +170,10 @@ def main():
     for date in dates:
         d, is_cur = (curated[date], True) if date in curated else (auto_digest(load_json(cands[date])), False)
         for lang in ("en", "zh"):
-            page, (label, headlines, og_img) = render_page(d, dates, is_cur, lang)
+            page, (label, headlines, og_img, sq_img) = render_page(d, dates, is_cur, lang)
             (SITE / page_name(date, lang)).write_text(page)
             og.card(label, headlines, lang, SITE / og_img)
+            og.square(date if lang == "en" else label, headlines[0] if headlines else "", lang, SITE / sq_img)
             if date == dates[0]:
                 # index pages: same content, plus a one-time language redirect on the English landing page
                 idx = page
