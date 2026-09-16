@@ -1,11 +1,28 @@
 <!doctype html>
-<html lang="en" data-lang="en">
+<html lang="{{LANG}}" data-lang="{{LANGCODE}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Daily Brief · {{DATE}}</title>
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<link rel="canonical" href="{{URL}}">
+<link rel="alternate" hreflang="{{LANGCODE}}" href="{{URL}}">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Daily Brief">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:url" content="{{URL}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="{{LANG}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{TITLE}}">
+<meta name="twitter:description" content="{{DESC}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<!--INDEX_REDIRECT-->
 <style>
 :root{--bg:#f6f4ee;--fg:#1b1a17;--muted:#6b6760;--line:#dcd8cd;--card:#fffdf8;--accent:#b4451f;
   --ai:#4a5fc1;--tech:#1f7a6a;--crypto:#c48a12;--bio:#a4385c;color-scheme:light}
@@ -13,16 +30,15 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",sans-serif}
 a{color:inherit}
-[data-lang=en] [lang=zh],[data-lang=zh] [lang=en]{display:none}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .bar{max-width:920px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .brand{font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif;font-weight:700;font-size:20px;letter-spacing:.02em;text-decoration:none}
 .brand em{color:var(--accent);font-style:normal}
 nav{margin-left:auto;display:flex;gap:10px;align-items:center;font-size:14px}
 nav a{color:var(--muted);text-decoration:none}
-.lang{border:1px solid var(--line);border-radius:999px;display:inline-flex;overflow:hidden}
-.lang button{border:0;background:none;color:var(--muted);padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
-.lang button.on{background:var(--fg);color:var(--bg)}
+.pill{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;background:none;color:var(--fg);cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.pill:hover{border-color:var(--fg)}
+.pill.lang{color:var(--muted)}
 main{max-width:920px;margin:0 auto;padding:28px 16px 60px}
 .date{font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(28px,5vw,40px);margin:0 0 6px;line-height:1.15}
 .sub{color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px}
@@ -35,61 +51,129 @@ main{max-width:920px;margin:0 auto;padding:28px 16px 60px}
 section{margin-top:34px}
 .topic{font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif;font-size:22px;margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--fg);display:flex;align-items:baseline;gap:10px}
 .topic small{color:var(--muted);font:13px sans-serif}
+.meta{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--muted);margin-bottom:6px}
+.num{font-family:Georgia,serif;font-size:13px}
+.tag{font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:11px}
+.tag.ai{color:var(--ai)}.tag.tech{color:var(--tech)}.tag.crypto{color:var(--crypto)}.tag.bio{color:var(--bio)}
 .long{padding:26px 0 30px;border-bottom:1px solid var(--line)}
 .hero{display:block;max-height:420px;overflow:hidden;border-radius:10px;background:var(--line);margin-bottom:14px}
 .hero img{width:100%;height:100%;max-height:420px;object-fit:cover;display:block}
-.long h2{font-size:26px;line-height:1.25;margin:4px 0 12px}
+.long h2{font-size:26px;line-height:1.25;margin:4px 0 12px;font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif}
+.long h2 a{text-decoration:none}.long h2 a:hover{color:var(--accent)}
 .long .body p{margin:0 0 12px;font-size:17px;line-height:1.65;max-width:72ch}
+.why{margin:8px 0 0;font-size:14px;color:var(--muted);border-left:3px solid var(--accent);padding-left:10px}
 .more{margin:6px 0 0;font-size:14px}.more a{color:var(--accent);text-decoration:none}
 .shorts{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
 .short{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
 .short:not(:has(.thumb)){grid-template-columns:1fr}
 .short h3{font-size:17px;line-height:1.3;margin:0 0 6px;font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif}
 .short h3 a{text-decoration:none}.short h3 a:hover{color:var(--accent)}
-.short .sum{font-size:14.5px;line-height:1.5;color:var(--muted)}
+.short .sum{font-size:14.5px;line-height:1.5;color:var(--muted);margin:0}
 .thumb{display:block;aspect-ratio:1;overflow:hidden;border-radius:8px;background:var(--line)}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.meta{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--muted);margin-bottom:6px}
-.num{font-family:Georgia,serif;font-size:13px}
-.tag{font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:11px}
-.tag.ai{color:var(--ai)}.tag.tech{color:var(--tech)}.tag.crypto{color:var(--crypto)}.tag.bio{color:var(--bio)}
-h2{font-size:19px;line-height:1.3;margin:0 0 8px;font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif}
-h2 a{text-decoration:none}h2 a:hover{color:var(--accent)}
-.sum{margin:0;color:var(--fg);opacity:.9}
-.why{margin:8px 0 0;font-size:14px;color:var(--muted);border-left:3px solid var(--accent);padding-left:10px}
+.share-btn{border:1px solid var(--line);background:none;color:var(--muted);border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:inherit}
+.share-btn.small{margin-left:auto;padding:3px 8px}
+.share-btn:hover{color:var(--fg);border-color:var(--fg)}
 .pager{display:flex;justify-content:space-between;margin-top:40px;font-size:14px}
 .pager a{color:var(--muted);text-decoration:none}
-.archive{list-style:none;padding:0;margin:20px 0}.archive li{padding:8px 0;border-bottom:1px solid var(--line)}
+.archive{list-style:none;padding:0;margin:20px 0}.archive li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}.archive .d{font-family:Georgia,serif;min-width:110px}
 footer{color:var(--muted);font-size:12px;padding:20px 16px 40px;max-width:920px;margin:0 auto;border-top:1px solid var(--line)}
 footer .notice{font-size:13px;line-height:1.55;margin:0 0 10px}footer a{color:var(--muted)}
+/* share dialog */
+dialog.share{border:0;border-radius:14px;padding:0;background:var(--card);color:var(--fg);max-width:420px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog.share::backdrop{background:rgba(0,0,0,.45)}
+.sh{padding:20px 20px 16px}
+.sh h4{margin:0 0 4px;font-size:17px;font-family:Georgia,"Songti SC","Noto Serif CJK SC",serif}
+.sh .what{font-size:13px;color:var(--muted);margin:0 0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sh .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sh .grid button,.sh .grid a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border:1px solid var(--line);border-radius:10px;background:none;color:var(--fg);font:inherit;font-size:12px;cursor:pointer;text-decoration:none}
+.sh .grid button:hover,.sh .grid a:hover{border-color:var(--fg)}
+.sh .grid svg{width:26px;height:26px}
+.sh .wx{display:none;margin-top:14px;text-align:center}
+.sh .wx.on{display:block}
+.sh .wx svg{width:180px;height:180px;background:#fff;padding:8px;border-radius:8px}
+.sh .wx p{font-size:12px;color:var(--muted);margin:8px 0 0}
+.sh .close{position:absolute;top:10px;right:12px;border:0;background:none;color:var(--muted);font-size:20px;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
+.toast.on{opacity:1}
 @media (max-width:760px){.shorts{grid-template-columns:1fr}.long h2{font-size:22px}.long .body p{font-size:16px}}
 </style>
 </head>
 <body>
 <header><div class="bar">
-  <a class="brand" href="index.html">Daily<em>Brief</em></a>
-  <nav><a href="archive.html"><span lang="en">Archive</span><span lang="zh">往期</span></a>
-  <span class="lang"><button data-set="en">EN</button><button data-set="zh">中文</button></span></nav>
+  <a class="brand" href="{{INDEX_HREF}}">Daily<em>Brief</em></a>
+  <nav>
+    <a href="archive.html">{{ARCHIVE}}</a>
+    <button class="pill share-btn" id="share-page" data-share-title="{{SHARE_TITLE}}" data-share-text="{{SHARE_TEXT}}" data-share-url="{{URL}}" data-share-qr="page">{{ICON}} {{SHARE}}</button>
+    <a class="pill lang" href="{{OTHER_URL}}" id="lang-switch">{{OTHER_LANG}}</a>
+  </nav>
 </div></header>
 <main>
-  <h1 class="date"><span lang="en">{{DATE_LONG_EN}}</span><span lang="zh">{{DATE_LONG_ZH}}</span></h1>
-  <div class="sub">{{BADGE}}<span>{{COUNT}} <span lang="en">items</span><span lang="zh">条</span></span></div>
-  <p class="intro"><span lang="en">{{INTRO_EN}}</span><span lang="zh">{{INTRO_ZH}}</span></p>
-  <div class="topics"><a href="#depth"><span lang="en">In depth</span><span lang="zh">深度</span></a><a href="#briefs"><span lang="en">Briefs</span><span lang="zh">简讯</span></a></div>
+  <h1 class="date">{{DATE_LONG}}</h1>
+  <div class="sub">{{BADGE}}<span>{{COUNT}} {{ITEMS_WORD}}</span></div>
+  <p class="intro">{{INTRO}}</p>
+  <div class="topics"><a href="#depth">{{INDEPTH}}</a><a href="#briefs">{{BRIEFS}}</a></div>
   {{SECTIONS}}
   <div class="pager">{{PREV}}{{NEXT}}</div>
 </main>
 <footer>
-  <p class="notice"><span lang="en"><strong>Personal, non-commercial use only.</strong> Daily Brief is a private reading digest for one person. It carries no advertising, sells nothing, and collects no data. Headlines and summaries are written in our own words from publicly available RSS feeds; every article and image remains the property of its original publisher and is linked to its source. Rights holders who want an item removed can <a href="https://github.com/DreamC0der-AI/daily-brief/issues" target="_blank" rel="noopener">open an issue</a> and it will be taken down promptly.</span><span lang="zh"><strong>仅供个人非商业使用。</strong>Daily Brief 是一个人的私人阅读摘要，不含广告、不销售任何内容、不收集数据。标题与摘要基于公开 RSS 源，以我们自己的语言撰写；所有文章和图片的版权归原出版方所有，并均链接至原始来源。权利人如需删除某条内容，可在 <a href="https://github.com/DreamC0der-AI/daily-brief/issues" target="_blank" rel="noopener">GitHub 提交 issue</a>，我们将及时处理。</span></p>
+  <p class="notice" lang="en"><strong>Personal, non-commercial use only.</strong> Daily Brief is a private reading digest for one person. It carries no advertising, sells nothing, and collects no data. Headlines and summaries are written in our own words from publicly available RSS feeds; every article and image remains the property of its original publisher and is linked to its source. Rights holders who want an item removed can <a href="https://github.com/DreamC0der-AI/daily-brief/issues" target="_blank" rel="noopener">open an issue</a> and it will be taken down promptly.</p>
+  <p class="notice" lang="zh"><strong>仅供个人非商业使用。</strong>Daily Brief 是一个人的私人阅读摘要，不含广告、不销售任何内容、不收集数据。标题与摘要基于公开 RSS 源，以我们自己的语言撰写；所有文章和图片的版权归原出版方所有，并均链接至原始来源。权利人如需删除某条内容，可在 <a href="https://github.com/DreamC0der-AI/daily-brief/issues" target="_blank" rel="noopener">GitHub 提交 issue</a>，我们将及时处理。</p>
   <p>Built from public RSS feeds · Summaries written by Claude Code · <a href="https://github.com/DreamC0der-AI/daily-brief" target="_blank" rel="noopener">Source</a></p>
 </footer>
+
+<dialog class="share" id="share-dlg" data-t-page="{{SHARE_PAGE}}" data-t-item="{{SHARE_ITEM}}" data-t-copied="{{COPIED}}">
+  <div class="sh">
+    <button class="close" id="share-close" aria-label="close">×</button>
+    <h4 id="share-heading">{{SHARE_PAGE}}</h4>
+    <p class="what" id="share-what"></p>
+    <div class="grid">
+      <button data-net="wechat"><svg viewBox="0 0 24 24" fill="#07c160"><path d="M8.7 4C4.9 4 2 6.6 2 9.8c0 1.8.9 3.4 2.5 4.5l-.6 2 2.3-1.2c.8.2 1.6.4 2.5.4h.4a5 5 0 0 1-.2-1.4c0-3 2.9-5.5 6.5-5.5h.4C15.2 6 12.3 4 8.7 4zm-2.3 3.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm4.6 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM15.4 10c-3.3 0-5.9 2.2-5.9 4.9s2.6 4.9 5.9 4.9c.7 0 1.4-.1 2-.3l1.9 1-.5-1.7c1.5-1 2.5-2.4 2.5-3.9 0-2.7-2.6-4.9-5.9-4.9zm-2 2.6a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zm4 0a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6z"/></svg>{{WECHAT}}</button>
+      <a data-net="x" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2H21l-6.5 7.5L22 22h-6.8l-4.8-6.3L4.9 22H2l7-8L2 2h6.9l4.3 5.7L18.2 2zm-1.2 18h1.7L7.1 3.9H5.3L17 20z"/></svg>X</a>
+      <a data-net="telegram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#2aabee"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 6.8-1.6 7.6c-.1.5-.4.7-.9.4l-2.4-1.8-1.2 1.1c-.1.1-.2.2-.5.2l.2-2.5 4.5-4.1c.2-.2 0-.3-.3-.1l-5.6 3.5-2.4-.8c-.5-.2-.5-.5.1-.7l9.4-3.6c.4-.2.8.1.7.8z"/></svg>Telegram</a>
+      <a data-net="whatsapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#25d366"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.7-.4z"/></svg>WhatsApp</a>
+      <a data-net="weibo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#e6162d"><path d="M10.1 19.6c-3.5.3-6.6-1.2-6.9-3.5-.3-2.2 2.3-4.3 5.8-4.6 3.5-.3 6.6 1.2 6.9 3.5.3 2.2-2.3 4.3-5.8 4.6zm7.3-6.3c-.3-.1-.5-.2-.3-.6.4-1 .4-1.9 0-2.5-.8-1.1-2.9-1.1-5.3 0 0 0-.8.3-.6-.3.4-1.2.3-2.2-.3-2.8-1.3-1.3-4.8 0-7.8 3-2.2 2.2-3.5 4.6-3.5 6.7 0 3.9 5 6.3 10 6.3 6.5 0 10.8-3.8 10.8-6.8 0-1.8-1.5-2.8-2.9-3.2zm-7.6 5.1c-2 .2-3.6-.7-3.7-2s1.4-2.5 3.4-2.7c2-.2 3.6.7 3.7 2s-1.4 2.5-3.4 2.7zm3.9-6.8zM21.9 8.6a.8.8 0 0 1-1.6-.3 3.4 3.4 0 0 0-3.7-4.4.8.8 0 1 1-.3-1.6 5 5 0 0 1 5.6 6.3zm-3.2-.6a.7.7 0 0 1-1.3-.3 1.5 1.5 0 0 0-1.6-1.9.7.7 0 1 1-.3-1.3 2.9 2.9 0 0 1 3.2 3.5z"/></svg>微博</a>
+      <button data-net="copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>{{COPY}}</button>
+      <button data-net="copytext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>{{COPYTEXT}}</button>
+      <button data-net="native" id="share-native" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>{{NATIVE}}</button>
+    </div>
+    <div class="wx" id="share-wx"><div id="share-qr"></div><p>{{WECHAT_HINT}}</p></div>
+  </div>
+</dialog>
+<template id="qr-page">{{PAGE_QR}}</template>
+<div class="toast" id="toast"></div>
+
 <script>
-(function(){var r=document.documentElement,k='dailybrief-lang';
-function set(l){r.setAttribute('data-lang',l);r.lang=l==='zh'?'zh-CN':'en';try{localStorage.setItem(k,l)}catch(e){}
- document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.set===l)})}
-var s=null;try{s=localStorage.getItem(k)}catch(e){}
-set(s||((navigator.language||'').startsWith('zh')?'zh':'en'));
-document.querySelectorAll('.lang button').forEach(function(b){b.onclick=function(){set(b.dataset.set)}})})();
+(function(){
+  var dlg=document.getElementById('share-dlg'),qrBox=document.getElementById('share-qr'),wx=document.getElementById('share-wx');
+  var toast=document.getElementById('toast');var cur={};
+  var LANG=document.documentElement.getAttribute('data-lang');
+  try{localStorage.setItem('dailybrief-lang',LANG)}catch(e){}
+  function say(t){toast.textContent=t;toast.classList.add('on');setTimeout(function(){toast.classList.remove('on')},1600)}
+  function copy(t){if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(t)}
+    var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();return Promise.resolve()}
+  function open(btn){
+    cur={title:btn.dataset.shareTitle,text:btn.dataset.shareText||btn.dataset.shareTitle,url:btn.dataset.shareUrl,qr:btn.dataset.shareQr};
+    document.getElementById('share-heading').textContent=cur.qr==='page'?dlg.dataset.tPage:dlg.dataset.tItem;
+    document.getElementById('share-what').textContent=cur.title;
+    wx.classList.remove('on');
+    var tpl=document.getElementById('qr-'+cur.qr);qrBox.innerHTML=tpl?tpl.innerHTML:'';
+    var enc=encodeURIComponent, u=enc(cur.url), t=enc(cur.text);
+    dlg.querySelector('[data-net=x]').href='https://twitter.com/intent/tweet?text='+t+'&url='+u;
+    dlg.querySelector('[data-net=telegram]').href='https://t.me/share/url?url='+u+'&text='+t;
+    dlg.querySelector('[data-net=whatsapp]').href='https://wa.me/?text='+enc(cur.text+'\n'+cur.url);
+    dlg.querySelector('[data-net=weibo]').href='https://service.weibo.com/share/share.php?url='+u+'&title='+t;
+    document.getElementById('share-native').hidden=!navigator.share;
+    dlg.showModal();
+  }
+  document.querySelectorAll('.share-btn').forEach(function(b){b.addEventListener('click',function(){open(b)})});
+  document.getElementById('share-close').onclick=function(){dlg.close()};
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  dlg.querySelector('[data-net=wechat]').onclick=function(){wx.classList.toggle('on');copy(cur.url).then(function(){say(dlg.dataset.tCopied)})};
+  dlg.querySelector('[data-net=copy]').onclick=function(){copy(cur.url).then(function(){say(dlg.dataset.tCopied)})};
+  dlg.querySelector('[data-net=copytext]').onclick=function(){copy(cur.text+'\n\n'+cur.url).then(function(){say(dlg.dataset.tCopied)})};
+  document.getElementById('share-native').onclick=function(){navigator.share({title:cur.title,text:cur.text,url:cur.url}).catch(function(){})};
+})();
 </script>
 </body>
 </html>
