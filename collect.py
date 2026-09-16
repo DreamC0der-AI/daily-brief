@@ -14,6 +14,7 @@ ROOT = Path(__file__).parent
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36"}
 TRACKING = {"utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "ref", "fbclid", "gclid", "src"}
 TAG_RE = re.compile(r"<[^>]+>")
+JUNK_TITLE = re.compile(r"promo code|coupon|discount code|referral deal|best deals|% off|\bdeals?\b.*\bsale\b", re.I)
 IMG_RE = re.compile(r"<img[^>]+src=[\"']([^\"']+)", re.I)
 OG_RE = [re.compile(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)', re.I),
          re.compile(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']', re.I),
@@ -68,7 +69,7 @@ def fetch_feed(topic, src):
         for e in f.entries:
             link = e.get("link")
             title = (e.get("title") or "").strip()
-            if not link or not title:
+            if not link or not title or JUNK_TITLE.search(title):
                 continue
             body = e.get("summary", "")
             if e.get("content"):
