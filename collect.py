@@ -14,6 +14,9 @@ ROOT = Path(__file__).parent
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120 Safari/537.36"}
 TRACKING = {"utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "ref", "fbclid", "gclid", "src"}
 TAG_RE = re.compile(r"<[^>]+>")
+POINTS_RE = re.compile(r"Points:\s*(\d+)")
+HOT_POINTS = 300      # Hacker News score that marks an item as hot
+HOT_HOURS = 72        # hot items survive this long instead of the normal window
 JUNK_TITLE = re.compile(r"promo code|coupon|discount code|referral deal|best deals|% off|\bdeals?\b.*\bsale\b", re.I)
 IMG_RE = re.compile(r"<img[^>]+src=[\"']([^\"']+)", re.I)
 OG_RE = [re.compile(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)', re.I),
@@ -79,6 +82,7 @@ def fetch_feed(topic, src):
                 "title": strip_html(title, 300), "url": link, "canonical": clean_url(link),
                 "published": entry_time(e), "excerpt": strip_html(body), "image": entry_image(e),
                 "comments": e.get("comments"),
+                "points": int(m.group(1)) if (m := POINTS_RE.search(body or "")) else None,
             })
         return src["name"], items, None
     except Exception as ex:
@@ -101,7 +105,7 @@ def og_image(url):
 def score(item, now):
     age_h = (now - item["published"]).total_seconds() / 3600 if item["published"] else 24
     recency = max(0.0, 1.0 - age_h / 48)
-    return round(item["weight"] * (0.5 + recency) + (0.3 if item["image"] else 0), 3)
+    return round(item["weight"] * (0.5 + recency) + (0.3 if item["image"] else 0) + (1.0 if item.get("hot") else 0), 3)
 
 
 def main():
@@ -127,11 +131,13 @@ def main():
 
     # Keep recent; undated feeds get a synthetic timestamp so they are not dropped.
     fresh = []
+    hot_cutoff = now - dt.timedelta(hours=HOT_HOURS)
     for it in raw:
         if it["published"] is None:
             it["published"] = now - dt.timedelta(hours=12)
             it["undated"] = True
-        if it["published"] >= cutoff:
+        it["hot"] = bool(it.get("points") and it["points"] >= HOT_POINTS)
+        if it["published"] >= cutoff or (it["hot"] and it["published"] >= hot_cutoff):
             fresh.append(it)
 
     # Dedupe by canonical URL, then by normalized title.
@@ -172,13 +178,16 @@ def main():
     out = {
         "date": args.date, "generated_at": now.isoformat(), "window_hours": args.hours,
         "counts": dict(Counter(it["topic"] for it in items)), "with_image": sum(1 for it in items if it["image"]),
+        "hot": [{"id": it["id"], "title": it["title"], "points": it["points"]} for it in items if it.get("hot")],
         "errors": errors, "items": items,
     }
     path = ROOT / "data" / "candidates" / f"{args.date}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(out, ensure_ascii=False, indent=1))
-    print(f"wrote {path}: {len(items)} items {out['counts']} images={out['with_image']} "
+    print(f"wrote {path}: {len(items)} items {out['counts']} images={out['with_image']} hot={len(out['hot'])} "
           f"errors={len(errors)} in {time.time()-t0:.1f}s")
+    for h in out["hot"]:
+        print(f"  HOT {h['points']:>5}  {h['title'][:90]}")
     for k, v in errors.items():
         print(f"  ! {k}: {v}", file=sys.stderr)
 

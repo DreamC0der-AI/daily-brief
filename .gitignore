@@ -3,3 +3,5 @@ __pycache__/
 site/
 .DS_Store
 .playwright-mcp/
+data/fetched/
+scripts_digest_*.py
